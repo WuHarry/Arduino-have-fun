@@ -55,34 +55,42 @@ void loop() {
              client.println("<br />");
              return;
            } 
-           for(int m = 0 ; m < 1 ; ++m)
-           { 
-             h=dht.readHumidity();
-             t=dht.readTemperature();
-             client.print("Humidity:");
-             client.print(h);
-             client.print("Temperture:");
-             client.print(t);
-             client.println("<br />");
-             if(t > 50.00 || h > 70.00)
-             {
+           
+//           带警报
+//           for(int m = 0 ; m < 50 ; ++m)
+//           { 
+//             h=dht.readHumidity();
+//             t=dht.readTemperature();
+//             client.print("Humidity:");
+//             client.print(h);
+//             client.print("Temperture:");
+//             client.print(t);
+//             client.println("<br />");
+//             if(t > 50.00 || h > 70.00)
+//             {
             // 普通报警声
-                for(int i=0;i<160;i++)//输出一个频率的声音
-                {
-                  pinMode(4,OUTPUT);
-                  digitalWrite(4,LOW);//发声音
-                  delay(2);//延时2ms
-                  digitalWrite(4,HIGH);//不发声音
-                  delay(2);//延时2ms
-                }
-             }
-             else
-             {
+//                for(int i=0;i<160;i++)//输出一个频率的声音
+//                {
+//                  pinMode(4,OUTPUT);
+//                  digitalWrite(4,LOW);//发声音
+//                  delay(2);//延时2ms
+//                  digitalWrite(4,HIGH);//不发声音
+//                  delay(2);//延时2ms
+//                }
+//             }
+//             else
+//             {
             //   noTone(4);
-                 digitalWrite(4,HIGH);//不发声音
-             }  
+//                 digitalWrite(4,HIGH);//不发声音
+//             }  
              //delay(500);
-           }
+//           }
+           h=dht.readHumidity();
+           t=dht.readTemperature();
+           client.print("Humidity:");
+           client.print(h);
+           client.print("Temperture:");
+           client.print(t);
            client.println("<br />");
            client.println("<br />");
            client.println("</body>");
