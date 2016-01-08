@@ -3,6 +3,7 @@ __author__ = 'Harry Wu'
 from Tkinter import *
 import urllib2
 import sys, time
+import winsound
 
 
 class UnicodeStreamFilter:
@@ -26,10 +27,15 @@ ip_list=[]
 for line in open("ip.config"):
     line=line.strip('\n')
     ip_list.append(line)
+#从配置文件读取ip对应名称
+ip_list_name=[]
+for line in open("name.config"):
+    line=line.strip('\n')
+    ip_list_name.append(line)
 
 #ip_1 = raw_input("请输入ip地址: ")
-Temp_1 = input("请输入温度阈值(纯数字可带小数): ")
-Humi_1 = input("请输入湿度阈值(纯数字可带小数): ")
+Temp_1 = input("请输入温度安全值(纯数字可带小数): ")
+Humi_1 = input("请输入湿度安全值(纯数字可带小数): ")
 
 ip_head="http://"
 
@@ -88,18 +94,19 @@ while True:
 
     if __name__ == '__main__':
         for x in range(0, list_length):
-            sys.stdout.write ("第"+str(x+1)+"组 "+"湿度: "+ip_humi[x]+"  温度: "+ip_temp[x]+"\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
-
+            sys.stdout.write(ip_list_name[x]+" "+"湿度: "+ip_humi[x]+"  温度: "+ip_temp[x]+"                "+"\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b")
             if (float(ip_humi[x])>Humi_1):
                 root = Tk()
                 w = Label(root, text=ip_list[x]+"  湿度超标！")
                 w.pack()
+                winsound.Beep(600,1000)
                 root.mainloop()
                 time.sleep(10)
             if (float(ip_temp[x])>Temp_1):
                 root = Tk()
                 w = Label(root, text=ip_list[x]+"  温度超标！")
                 w.pack()
+                winsound.Beep(600,1000)
                 root.mainloop()
                 time.sleep(10)
             time.sleep(2)
